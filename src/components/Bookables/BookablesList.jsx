@@ -1,6 +1,6 @@
-import {useReducer, Fragment} from 'react';
-import {bookables, sessions, days} from "../../static.json";
-import {FaArrowRight} from "react-icons/fa";
+import { useReducer, Fragment } from 'react';
+import { bookables, sessions, days } from "../../static.json";
+import { FaArrowRight } from "react-icons/fa";
 
 import reducer from "./reducer";
 
@@ -11,35 +11,35 @@ const initialState = {
   bookables
 };
 
-export default function BookablesList () {
+export default function BookablesList() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const {group, bookableIndex, bookables, hasDetails} = state;
+  const { group, bookableIndex, bookables, hasDetails } = state;
 
   const bookablesInGroup = bookables.filter(b => b.group === group);
   const bookable = bookablesInGroup[bookableIndex];
   const groups = [...new Set(bookables.map(b => b.group))];
 
-  function changeGroup (e) {
+  function changeGroup(e) {
     dispatch({
       type: "SET_GROUP",
       payload: e.target.value
     });
   }
 
-  function changeBookable (selectedIndex) {
+  function changeBookable(selectedIndex) {
     dispatch({
       type: "SET_BOOKABLE",
       payload: selectedIndex
     });
   }
 
-  function nextBookable () {
-    dispatch({type: "NEXT_BOOKABLE"});
+  function nextBookable() {
+    dispatch({ type: "NEXT_BOOKABLE" });
   }
 
-  function toggleDetails () {
-    dispatch({type: "TOGGLE_HAS_DETAILS"});
+  function toggleDetails() {
+    dispatch({ type: "TOGGLE_HAS_DETAILS" });
   }
 
   return (
@@ -73,7 +73,7 @@ export default function BookablesList () {
             onClick={nextBookable}
             autoFocus
           >
-            <FaArrowRight/>
+            <FaArrowRight />
             <span>Next</span>
           </button>
         </p>
