@@ -1,0 +1,13 @@
+import { useState } from "react";
+import UserDetails from "./UserDetails";
+import UsersList from "./UsersList";
+
+export default function UsersPage() {
+  const [user, setUser] = useState();
+  return (
+    <main className="users-page">
+      <UsersList user={user} setUser={setUser} />
+      <UserDetails user={user} />
+    </main>
+  );
+}

@@ -1,14 +1,15 @@
-import {useState, useEffect, useRef} from 'react';
-import {FaArrowRight} from "react-icons/fa";
+import { useState, useEffect, useRef } from 'react';
+import { FaArrowRight } from "react-icons/fa";
 import Spinner from "../UI/Spinner";
 import getData from "../../utils/api";
 
-export default function BookablesList ({bookable, setBookable}) {
+export default function BookablesList({ bookable, setBookable }) {
   const [bookables, setBookables] = useState([]);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const group = bookable?.group;
+
 
   const bookablesInGroup = bookables.filter(b => b.group === group);
   const groups = [...new Set(bookables.map(b => b.group))];
@@ -17,7 +18,6 @@ export default function BookablesList ({bookable, setBookable}) {
 
   useEffect(() => {
     getData("http://localhost:3001/bookables")
-
       .then(bookables => {
         setBookable(bookables[0]);
         setBookables(bookables);
@@ -30,19 +30,19 @@ export default function BookablesList ({bookable, setBookable}) {
       });
   }, [setBookable]);
 
-  function changeGroup (e) {
+  function changeGroup(e) {
     const bookablesInSelectedGroup = bookables.filter(
       b => b.group === e.target.value
     );
     setBookable(bookablesInSelectedGroup[0]);
   }
 
-  function changeBookable (selectedBookable) {
+  function changeBookable(selectedBookable) {
     setBookable(selectedBookable);
     nextButtonRef.current.focus();
   }
 
-  function nextBookable () {
+  function nextBookable() {
     const i = bookablesInGroup.indexOf(bookable);
     const nextIndex = (i + 1) % bookablesInGroup.length;
     const nextBookable = bookablesInGroup[nextIndex];
@@ -54,7 +54,7 @@ export default function BookablesList ({bookable, setBookable}) {
   }
 
   if (isLoading) {
-    return <p><Spinner/> Loading bookables...</p>
+    return <p><Spinner /> Loading bookables...</p>
   }
 
   return (
@@ -85,7 +85,7 @@ export default function BookablesList ({bookable, setBookable}) {
           ref={nextButtonRef}
           autoFocus
         >
-          <FaArrowRight/>
+          <FaArrowRight />
           <span>Next</span>
         </button>
       </p>
