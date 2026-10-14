@@ -1,4 +1,4 @@
-import {useReducer, Fragment} from "react";
+import { useReducer, Fragment } from "react";
 
 import BookablesList from "./BookablesList";
 import BookableDetails from "./BookableDetails";
@@ -13,8 +13,9 @@ const initialState = {
   error: false
 };
 
-export default function BookablesView () {
+export default function BookablesView() {
   const [state, dispatch] = useReducer(reducer, initialState);
+
 
   const bookablesInGroup = state.bookables.filter(
     b => b.group === state.group
@@ -23,8 +24,8 @@ export default function BookablesView () {
 
   return (
     <Fragment>
-      <BookablesList state={state} dispatch={dispatch}/>
-      <BookableDetails bookable={bookable}/>
+      <BookablesList state={state} dispatch={dispatch} />
+      <BookableDetails bookable={bookable} />
     </Fragment>
   );
 }
