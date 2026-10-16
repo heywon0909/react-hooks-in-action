@@ -1,6 +1,6 @@
-import {shortISO} from "./date-wrangler";
+import { shortISO } from "./date-wrangler";
 
-export default function getData (url) {
+export default function getData(url) {
   return fetch(url)
     .then(resp => {
       if (!resp.ok) {
@@ -11,7 +11,7 @@ export default function getData (url) {
     });
 }
 
-export function getBookings (bookableId, startDate, endDate) {
+export function getBookings(bookableId, startDate, endDate) {
 
   const start = shortISO(startDate);
   const end = shortISO(endDate);
