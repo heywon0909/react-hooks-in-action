@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -8,7 +8,7 @@ import {
 
 import "../App.css";
 
-import {FaCalendarAlt, FaDoorOpen, FaUsers} from "react-icons/fa";
+import { FaCalendarAlt, FaDoorOpen, FaUsers } from "react-icons/fa";
 
 import BookablesPage from "./Bookables/BookablesPage";
 import BookingsPage from "./Bookings/BookingsPage";
@@ -17,11 +17,11 @@ import UserPicker from "./Users/UserPicker";
 
 import UserContext from "./Users/UserContext";
 
-export default function App () {
+export default function App() {
   const [user, setUser] = useState();
 
   return (
-    <UserContext.Provider value={user}>
+    <UserContext.Provider value={{ user, setUser }}>
       <Router>
         <div className="App">
           <header>
@@ -29,32 +29,32 @@ export default function App () {
               <ul>
                 <li>
                   <Link to="/bookings" className="btn btn-header">
-                    <FaCalendarAlt/>
+                    <FaCalendarAlt />
                     <span>Bookings</span>
                   </Link>
                 </li>
                 <li>
                   <Link to="/bookables" className="btn btn-header">
-                    <FaDoorOpen/>
+                    <FaDoorOpen />
                     <span>Bookables</span>
                   </Link>
                 </li>
                 <li>
                   <Link to="/users" className="btn btn-header">
-                    <FaUsers/>
+                    <FaUsers />
                     <span>Users</span>
                   </Link>
                 </li>
               </ul>
             </nav>
 
-            <UserPicker user={user} setUser={setUser}/>
+            <UserPicker user={user} setUser={setUser} />
           </header>
 
           <Routes>
-            <Route path="/bookings" element={<BookingsPage/>}/>
-            <Route path="/bookables" element={<BookablesPage/>}/>
-            <Route path="/users" element={<UsersPage/>}/>
+            <Route path="/bookings" element={<BookingsPage />} />
+            <Route path="/bookables" element={<BookablesPage />} />
+            <Route path="/users" element={<UsersPage />} />
           </Routes>
         </div>
       </Router>
