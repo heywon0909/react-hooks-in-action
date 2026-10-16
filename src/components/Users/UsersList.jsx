@@ -1,16 +1,20 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Spinner from "../UI/Spinner";
 import getData from "../../utils/api";
+import UserContext from "./UserContext";
 
-export default function UsersList ({user, setUser}) {
+export default function UsersList({ user, setUser }) {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState(null);
 
+  const loggedInUser = useContext(UserContext);
+
   useEffect(() => {
+
     getData("http://localhost:3001/users")
       .then(data => {
-        setUser(data[0]); // set initial user to first (or undefined)
+        setUser(loggedInUser || data[0]); // set initial user to first (or undefined)
         setUsers(data);
         setIsLoading(false);
       })
@@ -18,14 +22,17 @@ export default function UsersList ({user, setUser}) {
         setError(error);
         setIsLoading(false);
       });
-  }, [setUser]); // pass in dependency
+
+  }, [setUser, loggedInUser]); // pass in dependency
+
+
 
   if (error) {
     return <p>{error.message}</p>
   }
 
   if (isLoading) {
-    return <p><Spinner/> Loading users...</p>
+    return <p><Spinner /> Loading users...</p>
   }
 
   // user user.id to match selection.
